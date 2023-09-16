@@ -15,7 +15,9 @@ const modelParams = {
     flipHorizontal: true,   // flip e.g for video  
     maxNumBoxes: 1,        // maximum number of boxes to detect
     iouThreshold: 0.5,      // ioU threshold for non-max suppression
-    scoreThreshold: 0.6,    // confidence threshold for predictions.
+    scoreThreshold: 0.55,    // confidence threshold for predictions.
+    modelSize: "small",
+
 }
 
 // const modelParams = {
@@ -89,26 +91,32 @@ function runDetection() {
         const img = document.getElementById("scream");
 
         predictions.filter((item) => {
-            if ((item.label === 'closed' || item.label === 'open' || item.label === 'point') && item.score > 0.60) {
+            if (item.label === 'closed' || item.label === 'pinch' || item.label === 'point' || item.label === "open") {
                 console.log(`X: ${item.bbox[0]}, Y: ${item.bbox[1]}`);
+
+                if ((item.bbox[0] > 30 && item.bbox[0] < 270) && (item.bbox[1] > 240 && item.bbox[1] < 380)) {
+                    hihat1.play();
+                } else if ((item.bbox[0] > 500 && item.bbox[0] < 800) && (item.bbox[1] > 100 && item.bbox[1] < 200)) {
+                    hihat2.play();
+                } else if ((item.bbox[0] > 100 && item.bbox[0] < 400) && (item.bbox[1] > 100 && item.bbox[1] < 180)) {
+                    hihat3.play();
+                }
 
                 // context.drawImage(img, item.bbox[0], item.bbox[1], 300, 300);
                 // context.clearRect(0, 0, canvas.width, canvas.height);
                 function animate() {
                     context2.clearRect(0, 0, canvas.width, canvas.height);
-                    context2.drawImage(img, item.bbox[0], item.bbox[1], 130, 130);
+                    context2.drawImage(img, item.bbox[0] - 100, item.bbox[1] - 150, 110, 110);
 
                     requestAnimationFrame(animate)
                 }
                 animate()
-
-
             }
         })
 
         // console.log("Predictions: ", predictions);
         model.renderPredictions(predictions.filter((item) => {
-            if ((item.label === 'closed' || item.label === 'open' || item.label === 'point') && item.score > 0.80) {
+            if ((item.label === 'closed' || item.label === 'open' || item.label === 'point') && item.score > 0.30) {
                 return item;
             }
         }), canvas, context, video);
@@ -118,6 +126,28 @@ function runDetection() {
     });
 }
 
+// function drawHats() {
+//     context2.beginPath();
+//     context2.lineWidth = "6";
+//     context2.strokeStyle = "red";
+//     context2.rect(150, 315, 84, 160);
+//     context2.stroke();
+
+//     context2.beginPath();
+//     context2.lineWidth = "6";
+//     context2.strokeStyle = "red";
+//     context2.rect(253, 174, 84, 160);
+//     context2.stroke();
+
+//     context2.beginPath();
+//     context2.lineWidth = "6";
+//     context2.strokeStyle = "red";
+//     context2.rect(682, 174, 84, 160);
+//     context2.stroke();
+
+// }
+
+// drawHats();
 // Load the model.
 handTrack.load(modelParams).then(lmodel => {
     // detect objects in the image.
