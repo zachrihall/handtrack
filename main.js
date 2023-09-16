@@ -6,6 +6,11 @@ const context2 = canvas2.getContext("2d");
 let trackButton = document.getElementById("trackbutton");
 let updateNote = document.getElementById("updatenote");
 
+let kick = document.querySelector("#kick");
+let hihat1 = document.querySelector("#hihat1");
+let hihat2 = document.querySelector("#hihat2");
+let hihat3 = document.querySelector("#hihat3");
+
 let isVideo = false;
 let model = null;
 // const model =  await handTrack.load();
@@ -92,8 +97,32 @@ function runDetection() {
 
         predictions.filter((item) => {
             if (item.label === 'closed' || item.label === 'pinch' || item.label === 'point' || item.label === "open") {
-                console.log(`X: ${item.bbox[0]}, Y: ${item.bbox[1]}`);
+                // console.log(`X: ${item.bbox[0]}, Y: ${item.bbox[1]}`);
 
+                //OLD CODE
+                // Hi-Hats
+                /*
+                if ((item.bbox[0] > 30 && item.bbox[0] < 270) && (item.bbox[1] > 240 && item.bbox[1] < 380)) {
+                    hihat1.play();
+                } else if ((item.bbox[0] > 500 && item.bbox[0] < 800) && (item.bbox[1] > 100 && item.bbox[1] < 200)) {
+                    hihat2.play();
+                } else if ((item.bbox[0] > 100 && item.bbox[0] < 400) && (item.bbox[1] > 100 && item.bbox[1] < 180)) {
+                    hihat3.play();
+                }
+                */
+                //OLD CODE
+                // const vec2 =
+                // {
+                //     x,
+                //     y
+
+                //     vec2 () =>
+                //     {
+
+                //     }
+                // };
+
+                var sticktip = new vec2()
                 // Hi-Hats
                 if ((item.bbox[0] > 30 && item.bbox[0] < 270) && (item.bbox[1] > 240 && item.bbox[1] < 380)) {
                     hihat1.play();
@@ -102,9 +131,6 @@ function runDetection() {
                 } else if ((item.bbox[0] > 100 && item.bbox[0] < 400) && (item.bbox[1] > 100 && item.bbox[1] < 180)) {
                     hihat3.play();
                 }
-                // else if ((item.bbox[0] > 371 && item.bbox[0] < 554) && (item.bbox[1] > 396 && item.bbox[1] < 513)) {
-                //     kick.play();
-                // }
 
                 // Snares
 
