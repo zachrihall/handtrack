@@ -101,9 +101,10 @@ function runDetection() {
                     hihat2.play();
                 } else if ((item.bbox[0] > 100 && item.bbox[0] < 400) && (item.bbox[1] > 100 && item.bbox[1] < 180)) {
                     hihat3.play();
-                }else if ((item.bbox[0] > 371 && item.bbox[0] < 554) && (item.bbox[1] > 396 && item.bbox[1] < 513)) {
-                    kick.play();
                 }
+                // else if ((item.bbox[0] > 371 && item.bbox[0] < 554) && (item.bbox[1] > 396 && item.bbox[1] < 513)) {
+                //     kick.play();
+                // }
 
                 // Snares
 
