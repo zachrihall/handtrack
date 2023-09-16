@@ -94,13 +94,23 @@ function runDetection() {
             if (item.label === 'closed' || item.label === 'pinch' || item.label === 'point' || item.label === "open") {
                 console.log(`X: ${item.bbox[0]}, Y: ${item.bbox[1]}`);
 
+                // Hi-Hats
                 if ((item.bbox[0] > 30 && item.bbox[0] < 270) && (item.bbox[1] > 240 && item.bbox[1] < 380)) {
                     hihat1.play();
                 } else if ((item.bbox[0] > 500 && item.bbox[0] < 800) && (item.bbox[1] > 100 && item.bbox[1] < 200)) {
                     hihat2.play();
                 } else if ((item.bbox[0] > 100 && item.bbox[0] < 400) && (item.bbox[1] > 100 && item.bbox[1] < 180)) {
                     hihat3.play();
+                }else if ((item.bbox[0] > 371 && item.bbox[0] < 554) && (item.bbox[1] > 396 && item.bbox[1] < 513)) {
+                    kick.play();
                 }
+
+                // Snares
+
+                // Kick
+                // if ((item.bbox[0] > 371 && item.bbox[0] < 554) && (item.bbox[1] > 396 && item.bbox[1] < 513)) {
+                //     kick.play();
+                // }
 
                 // context.drawImage(img, item.bbox[0], item.bbox[1], 300, 300);
                 // context.clearRect(0, 0, canvas.width, canvas.height);
