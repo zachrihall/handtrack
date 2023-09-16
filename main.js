@@ -122,14 +122,23 @@ function runDetection() {
                 //     }
                 // };
 
-                var sticktip = new vec2()
+                // var sticktip = new vec2()
                 // Hi-Hats
-                if ((item.bbox[0] > 30 && item.bbox[0] < 270) && (item.bbox[1] > 240 && item.bbox[1] < 380)) {
+                if ((item.bbox[0] > 10 && item.bbox[0] < 150) && (item.bbox[1] > 200 && item.bbox[1] < 210)) {
                     hihat1.play();
-                } else if ((item.bbox[0] > 500 && item.bbox[0] < 800) && (item.bbox[1] > 100 && item.bbox[1] < 200)) {
+                }
+
+                if ((item.bbox[0] > 500 && item.bbox[0] < 800) && (item.bbox[1] > 100 && item.bbox[1] < 200)) {
                     hihat2.play();
-                } else if ((item.bbox[0] > 100 && item.bbox[0] < 400) && (item.bbox[1] > 100 && item.bbox[1] < 180)) {
+                }
+
+                if ((item.bbox[0] > 200 && item.bbox[0] < 400) && (item.bbox[1] > 100 && item.bbox[1] < 180)) {
                     hihat3.play();
+                }
+
+                if ((item.bbox[0] > 175 && item.bbox[0] < 240) && (item.bbox[1] > 245 && item.bbox[1] < 260)) {
+                    kick.play();
+                    // console.log("KICK");
                 }
 
                 // Snares
