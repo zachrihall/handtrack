@@ -1,6 +1,8 @@
 const video = document.getElementById("myvideo");
 const canvas = document.getElementById("canvas");
+const canvas2 = document.getElementById("canvas2");
 const context = canvas.getContext("2d");
+const context2 = canvas2.getContext("2d");
 let trackButton = document.getElementById("trackbutton");
 let updateNote = document.getElementById("updatenote");
 
@@ -11,7 +13,7 @@ let model = null;
 
 const modelParams = {
     flipHorizontal: true,   // flip e.g for video  
-    maxNumBoxes: 20,        // maximum number of boxes to detect
+    maxNumBoxes: 1,        // maximum number of boxes to detect
     iouThreshold: 0.5,      // ioU threshold for non-max suppression
     scoreThreshold: 0.6,    // confidence threshold for predictions.
 }
@@ -55,10 +57,10 @@ function toggleVideo() {
 }
 
 function filterPredictions(predictions) {
-  predictions.filter((item) => {
-      if( item.label === 'closed') {
-        return item
-      }
+    predictions.filter((item) => {
+        if (item.label === 'closed') {
+            return item
+        }
     })
 }
 
@@ -70,15 +72,46 @@ function runDetection() {
         //   console.log(predictions)
         // }
 
+        // function drawAndClear(x,y) {
+        //     if (i < 20) {
+        //         canvas.drawImage(img, x, y, 150, 180);
+        //         // console.log("Cleared and drew");
+
+        //         i++;
+        //         setTimeout(drawAndClear, 1000); // Wait for 3 seconds before the next iteration
+        //     } else {
+        //         // After the loop is finished, wait for 10 seconds
+        //         setTimeout(() => {
+        //             console.log("Finished waiting for 10 seconds");
+        //         }, 10000);
+        //     }
+        // }
+        const img = document.getElementById("scream");
+
         predictions.filter((item) => {
-          if( item.label === 'closed') {
-            console.log(item)
-          }
+            if ((item.label === 'closed' || item.label === 'open' || item.label === 'point') && item.score > 0.60) {
+                console.log(`X: ${item.bbox[0]}, Y: ${item.bbox[1]}`);
+
+                // context.drawImage(img, item.bbox[0], item.bbox[1], 300, 300);
+                // context.clearRect(0, 0, canvas.width, canvas.height);
+                function animate() {
+                    context2.clearRect(0, 0, canvas.width, canvas.height);
+                    context2.drawImage(img, item.bbox[0], item.bbox[1], 130, 130);
+
+                    requestAnimationFrame(animate)
+                }
+                animate()
+
+
+            }
         })
 
-        console.log("model predictions", model.renderPredictions)
         // console.log("Predictions: ", predictions);
-        model.renderPredictions(predictions, canvas, context, video);
+        model.renderPredictions(predictions.filter((item) => {
+            if ((item.label === 'closed' || item.label === 'open' || item.label === 'point') && item.score > 0.80) {
+                return item;
+            }
+        }), canvas, context, video);
         if (isVideo) {
             requestAnimationFrame(runDetection);
         }

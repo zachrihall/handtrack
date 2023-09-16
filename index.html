@@ -10,6 +10,7 @@
 </head>
 
 <body class="bx--body p20">
+  <img id="scream" src="drumstick-removebg-preview.png" alt="The Scream" width="220" height="277" style="display: none;">
   <!-- <img id="img" src="hand.jpg"/>  -->
   <div class="p20">
     Handtrack.js allows you prototype handtracking interactions in the browser in 10 lines of code.
@@ -22,7 +23,8 @@
   </div>
   <video class="videobox canvasbox" autoplay="autoplay" id="myvideo"></video>
 
-  <canvas id="canvas" class="border canvasbox"></canvas>
+  <canvas id="canvas" class="border canvasbox" style="position: absolute; z-index: 1;"></canvas>
+  <canvas id="canvas2" class="border canvasbox" style="position: absolute; z-index: 2; background-color: transparent;"></canvas>
 
   <script src="https://unpkg.com/carbon-components@latest/scripts/carbon-components.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"> </script>
