@@ -11,6 +11,10 @@ let hihat1 = document.querySelector("#hihat1");
 let hihat2 = document.querySelector("#hihat2");
 let hihat3 = document.querySelector("#hihat3");
 
+let guitar1 = document.querySelector("#guitar-1");
+let guitar2 = document.querySelector("#guitar-2");
+let guitar3 = document.querySelector("#guitar-3");
+
 let isVideo = false;
 let model = null;
 // const model =  await handTrack.load();
@@ -125,19 +129,19 @@ function runDetection() {
                 // var sticktip = new vec2()
                 // Hi-Hats
                 if ((item.bbox[0] > 10 && item.bbox[0] < 150) && (item.bbox[1] > 200 && item.bbox[1] < 210)) {
-                    hihat1.play();
+                    guitar1.play();
                 }
 
-                if ((item.bbox[0] > 500 && item.bbox[0] < 800) && (item.bbox[1] > 100 && item.bbox[1] < 200)) {
-                    hihat2.play();
-                }
+                // if ((item.bbox[0] > 500 && item.bbox[0] < 800) && (item.bbox[1] > 100 && item.bbox[1] < 200)) {
+                //     gui2.play();
+                // }
 
                 if ((item.bbox[0] > 200 && item.bbox[0] < 400) && (item.bbox[1] > 100 && item.bbox[1] < 180)) {
-                    hihat3.play();
+                    guitar2.play();
                 }
 
                 if ((item.bbox[0] > 175 && item.bbox[0] < 240) && (item.bbox[1] > 245 && item.bbox[1] < 260)) {
-                    kick.play();
+                    guitar3.play();
                     // console.log("KICK");
                 }
 
